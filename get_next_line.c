@@ -14,17 +14,28 @@
 
 char *get_next_line(int fd)
 {
-	int re;
+	static int re;
+	int i;
+	int j;
 	char *buffer;
 	char *str;
 
-	buffer = malloc(BUFFER_SIZE + 1);
-	str = NULL;
+	i = 0;
+	j = 0;
+	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	re = read(fd, buffer, BUFFER_SIZE);
-	buffer[re] = 0; 
-	str = ft_strjoin(buffer, str);
-	return(buffer);
+	printf("%d\n", re);
+	buffer[re] = '\0';
+	str = (char *)malloc(sizeof(char) * (re + 1));
+	if (!str)
+		return(NULL);
+	while(i < re && buffer[j] != '\n')
+		str[i++] = buffer[j++];
+	str[i] = '\0';
+	//printf("%d\n", re);
+	return(str);
 }
+
 int main()
 {
 	int fd;

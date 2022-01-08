@@ -19,9 +19,7 @@
 #include <stdlib.h>
 
 char	*get_next_line(int fd);
-size_t	ft_is_end_of_line(char *str);
-void	ft_putchar(char c);
-void	ft_putnbr(int n);
+int	ft_is_end_of_line(char *str);
 char	*ft_strjoin( char *s1,  char *s2);
 #endif
 
