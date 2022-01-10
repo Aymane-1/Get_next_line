@@ -6,7 +6,7 @@
 /*   By: aechafii <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/30 16:32:17 by aechafii          #+#    #+#             */
-/*   Updated: 2021/12/31 18:45:02 by aechafii         ###   ########.fr       */
+/*   Updated: 2022/01/08 17:36:49 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,11 @@
 #include <stdlib.h>
 
 char	*get_next_line(int fd);
-int	ft_is_end_of_line(char *str);
+int		ft_is_end_of_line(char *str);
+char    *ft_is_the_line(char *str);
 char	*ft_strjoin( char *s1,  char *s2);
+char	*ft_is_the_rest(char *str);
+size_t	ft_strlen(char *str);
+char   *ft_is_read(char *str, int fd);
 #endif
 
