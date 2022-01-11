@@ -12,38 +12,41 @@
 
 #include "get_next_line.h"
 
-char *get_next_line(int fd)
+char	*ft_is_read(char *str, int fd)
 {
- 	static char *buffer;
-	char *line;
-	//printf("%s", buffer);
-	if(BUFFER_SIZE <=0 || fd < 0)
-		return(NULL);
-	buffer = ft_is_read(buffer, fd);
-	//printf("buffer : %s", buffer);
-	line = ft_is_the_line(buffer);
-	//printf("line : %s", line);
-	buffer = ft_is_the_rest(buffer);
-	//printf("the rest = %s" , buffer);
-	return(line);
+	int		i;
+	char	*buffer;
+
+	i = 1;
+	buffer = malloc(BUFFER_SIZE + 1);
+	if (!buffer)
+		return (NULL);
+	while (i != 0 && ft_is_end_of_line(str) == 0)
+	{
+		i = read(fd, buffer, BUFFER_SIZE);
+		if (i == 0)
+			break ;
+		if (i < 0)
+		{
+			free(buffer);
+			return (NULL);
+		}
+		buffer[i] = '\0';
+		str = ft_strjoin(str, buffer);
+	}
+	free(buffer);
+	return (str);
 }
 
-// int main()
-// {
-// 	int fd;
-// 	fd = open("file", O_RDWR);
-// 	printf("%s", get_next_line(fd));
-// 	printf("%s", get_next_line(fd));
-// 	printf("%s", get_next_line(fd));
-// 	printf("%s", get_next_line(fd));
-// 	printf("%s", get_next_line(fd));
-// 	printf("%s", get_next_line(fd));
-// 	printf("%s", get_next_line(fd));
-// 	printf("%s", get_next_line(fd));
-// 	printf("%s", get_next_line(fd));
-// 	printf("%s", get_next_line(fd));
-// 	printf("%s", get_next_line(fd));
-// 	printf("%s", get_next_line(fd));
+char	*get_next_line(int fd)
+{
+	static char	*buffer;
+	char		*line;
 
-
-// }
+	if (BUFFER_SIZE <= 0 || fd < 0)
+		return (NULL);
+	buffer = ft_is_read(buffer, fd);
+	line = ft_is_the_line(buffer);
+	buffer = ft_is_the_rest(buffer);
+	return (line);
+}
